@@ -1,31 +1,13 @@
-import re
+text = "kskngwhg-1rthrh+2rhrh0rhrh122rhr500rhr"
+my_list = []
+num = ""
 
+for i in range(0, len(text)):
+    if text[i].isdigit():
+        num += f"{text[i - 1]}{text[i]}" if text[i - 1] == "-" else f"{text[i]}"
+    else:
+        if num:
+            my_list.append(int(num))
+            num = ''
 
-def min_max_numbers_search(text):
-    my_list = []
-    num = ''
-    for i in range(0, len(text)):
-        if re.search("[\-]", text[i]):
-            if re.search("[\d]", text[i + 1]):
-                num = num + str(re.search("[\-]", text[i]).group())
-        if re.search("[\d]", text[i]):
-            num = num + str(re.search("[\d]", text[i]).group())
-            if i == len(text) - 1:
-                my_list.append(num)
-        else:
-            if num != '' and num != '-':
-                my_list.append(num)
-                num = ''
-
-    max_el = int(my_list[0])
-    min_el = int(my_list[0])
-
-    for j in range(1, len(my_list)):
-        if int(my_list[j]) > max_el:
-            max_el = int(my_list[j])
-        if int(my_list[j]) < min_el:
-            min_el = int(my_list[j])
-    print('Min = ' + str(min_el) + ', Max = ' + str(max_el))
-
-
-min_max_numbers_search('ks56kngwhg-1rthrh+2rhrh0rhr789h122rhr500rhr-678r')
+print(f"Min = {min(my_list)}, Max = {max(my_list)}")
